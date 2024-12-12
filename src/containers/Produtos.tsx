@@ -6,10 +6,9 @@ import * as S from './styles'
 
 type Props = {
   favoritos: ProdutoType[]
-  favoritar: (produto: ProdutoType) => void
 }
 
-const ProdutosComponent = ({ favoritos, favoritar }: Props) => {
+const ProdutosComponent = ({ favoritos }: Props) => {
   const { data: produtos, isLoading } = useGetProdutosQuery()
   if (isLoading) return <h2>Carregando ...</h2>
   const produtoEstaNosFavoritos = (produto: ProdutoType) => {
@@ -23,12 +22,7 @@ const ProdutosComponent = ({ favoritos, favoritar }: Props) => {
     <>
       <S.Produtos>
         {produtos?.map((produto) => (
-          <Produto
-            estaNosFavoritos={produtoEstaNosFavoritos(produto)}
-            key={produto.id}
-            produto={produto}
-            favoritar={favoritar}
-          />
+          <Produto key={produto.id} produto={produto} />
         ))}
       </S.Produtos>
     </>
