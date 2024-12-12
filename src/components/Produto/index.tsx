@@ -20,6 +20,10 @@ const ProdutoComponent = ({ produto }: Props) => {
   const favoritos = useSelector((state: RootReducer) => state.favoritos.itens)
   const estaNosFavoritos = favoritos.some((f) => f.id === produto.id)
 
+  const handleToggleFavorito = () => {
+    dispatch(toggleFavorito(produto))
+  }
+
   return (
     <S.Produto>
       <S.Capa>
@@ -29,7 +33,7 @@ const ProdutoComponent = ({ produto }: Props) => {
       <S.Prices>
         <strong>{paraReal(produto.preco)}</strong>
       </S.Prices>
-      <S.BtnComprar onClick={() => toggleFavorito(produto)} type="button">
+      <S.BtnComprar onClick={handleToggleFavorito} type="button">
         {estaNosFavoritos
           ? '- Remover dos favoritos'
           : '+ Adicionar aos favoritos'}
